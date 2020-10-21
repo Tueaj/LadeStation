@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LadeSkab", "LadeSkab\LadeSk
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ladeskab.Test", "TestLadeSkab\Ladeskab.Test.csproj", "{37CD2FE7-B870-48C3-9028-0B8FF9E53475}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LadeSkab.Libary", "LadeSkab.Libary\LadeSkab.Libary.csproj", "{D9862092-6B99-42AE-82B2-912FC7E1BB40}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{37CD2FE7-B870-48C3-9028-0B8FF9E53475}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37CD2FE7-B870-48C3-9028-0B8FF9E53475}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{37CD2FE7-B870-48C3-9028-0B8FF9E53475}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9862092-6B99-42AE-82B2-912FC7E1BB40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9862092-6B99-42AE-82B2-912FC7E1BB40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9862092-6B99-42AE-82B2-912FC7E1BB40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9862092-6B99-42AE-82B2-912FC7E1BB40}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
