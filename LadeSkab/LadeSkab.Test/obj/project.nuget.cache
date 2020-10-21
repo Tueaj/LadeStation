@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "CSGdaO67jaL/iWeM6RrcCZmXVDzIRSZisrpauDC7ffMK665UwX2UOzJMKnuuYecfGqi2wpAMGSLiJaEfSQl7jQ==",
+  "dgSpecHash": "bs3ceFZvdG9esPF/R7y29Ta0Jy5qSc9RvtHQ+kgfSt4t66rhuRI5/LrzDVeowh/yQEI/272iVY6mXjkgxxMX5A==",
   "success": true,
-  "projectFilePath": "E:\\GitRepos\\LadeStation\\LadeSkab\\TestLadeSkab\\Ladeskab.Test.csproj",
+  "projectFilePath": "E:\\GitRepos\\LadeStation\\LadeSkab\\LadeSkab.Test\\Ladeskab.Test.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\alex8\\.nuget\\packages\\microsoft.codecoverage\\16.4.0\\microsoft.codecoverage.16.4.0.nupkg.sha512",
     "C:\\Users\\alex8\\.nuget\\packages\\microsoft.csharp\\4.0.1\\microsoft.csharp.4.0.1.nupkg.sha512",

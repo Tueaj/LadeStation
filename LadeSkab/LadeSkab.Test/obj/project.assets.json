@@ -4649,11 +4649,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\GitRepos\\LadeStation\\LadeSkab\\TestLadeSkab\\Ladeskab.Test.csproj",
+      "projectUniqueName": "E:\\GitRepos\\LadeStation\\LadeSkab\\LadeSkab.Test\\Ladeskab.Test.csproj",
       "projectName": "Ladeskab.Test",
-      "projectPath": "E:\\GitRepos\\LadeStation\\LadeSkab\\TestLadeSkab\\Ladeskab.Test.csproj",
+      "projectPath": "E:\\GitRepos\\LadeStation\\LadeSkab\\LadeSkab.Test\\Ladeskab.Test.csproj",
       "packagesPath": "C:\\Users\\alex8\\.nuget\\packages\\",
-      "outputPath": "E:\\GitRepos\\LadeStation\\LadeSkab\\TestLadeSkab\\obj\\",
+      "outputPath": "E:\\GitRepos\\LadeStation\\LadeSkab\\LadeSkab.Test\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\alex8\\AppData\\Roaming\\NuGet\\NuGet.Config",
