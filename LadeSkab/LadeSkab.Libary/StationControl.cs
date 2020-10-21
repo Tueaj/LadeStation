@@ -16,6 +16,8 @@ namespace Ladeskab
             DoorOpen
         };
 
+        private bool DoorState = true;
+        private bool ChargerIsConnected = false;
         // Her mangler flere member variable
         private LadeskabState _state;
         private IUsbCharger _charger;
@@ -85,9 +87,34 @@ namespace Ladeskab
         
         public StationControl(IDoor door)
         {
-           // door.
+            door.DoorValueEvent += HandleDoorChangeEvent;
+
+        }
+
+        private void HandleDoorChangeEvent(object sender, DoorValueEventArgs e)
+        {
+            DoorState = e.DoorOpen;
+            setLadeskabState();
 
         }
         // Her mangler de andre trigger handlere
+
+        public StationControl (IChargeControl charger)
+        {
+
+            charger.ChargerChangeEvent += HandleChargerChangeEvent;
+        }
+
+        private void HandleChargerChangeEvent(object sender, ChargerValueEventArgs e)
+        {
+
+            ChargerIsConnected = e.IsConnected;
+        }
+
+        private void setLadeskabState()
+        {
+
+
+        }
     }
 }
