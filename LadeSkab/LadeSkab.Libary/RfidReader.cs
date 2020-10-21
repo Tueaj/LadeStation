@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ladeskab
+namespace Ladeskab.Libary
 {
     public class RFIDDetectedEventArgs : EventArgs
     {

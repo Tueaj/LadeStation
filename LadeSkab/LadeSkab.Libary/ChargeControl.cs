@@ -1,4 +1,6 @@
-﻿namespace Ladeskab
+﻿using Ladeskab.Libary.interfaces;
+
+namespace Ladeskab.Libary
 {
     public class ChargeControl : IChargeControl
     {

@@ -24,7 +24,7 @@
                         break;
 
                     case 'O':
-                        door.OnDoorOpen();
+                        OnDoorOpen();
                         break;
 
                     case 'C':
