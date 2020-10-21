@@ -24,7 +24,7 @@ namespace Ladeskab.Libary
         private LadeskabState _state;
         private IChargeControl _charger;
         private IDoor _door;
-        private int _oldId;
+        private int _oldId = 0;
 
 
         private string logFile = "logfile.txt"; // Navnet på systemets log-fil
@@ -74,6 +74,7 @@ namespace Ladeskab.Libary
                         }
 
                         Console.WriteLine("Tag din telefon ud af skabet og luk døren");
+                        _oldId = 0;
                         _state = LadeskabState.Available;
                     }
                     else
@@ -111,12 +112,27 @@ namespace Ladeskab.Libary
         {
 
             ChargerIsConnected = e.ChargerConnected;
+            setLadeskabState();
         }
 
         private void setLadeskabState()
         {
 
+            if( DoorState)
+            {
 
+                _state = LadeskabState.DoorOpen;
+            }
+            else if(_oldId == 0 && DoorState == false && ChargerIsConnected == true)
+            {
+                _state = LadeskabState.Available;
+            }
+            else
+            {
+
+                _state = LadeskabState.DoorOpen;
+            }
+           
         }
     }
 }
