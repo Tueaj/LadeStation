@@ -22,7 +22,7 @@ namespace Ladeskab.Libary
         private bool ChargerIsConnected = false;
         // Her mangler flere member variable
         private LadeskabState _state;
-        private IUsbCharger _charger;
+        private IChargeControl _charger;
         private IDoor _door;
         private int _oldId;
 
@@ -38,7 +38,7 @@ namespace Ladeskab.Libary
             {
                 case LadeskabState.Available:
                     // Check for ladeforbindelse
-                    if (_charger.Connected)
+                    if (ChargerIsConnected)
                     {
                         _door.LockDoor();
                         _charger.StartCharge();
@@ -104,13 +104,13 @@ namespace Ladeskab.Libary
         public StationControl (IChargeControl charger)
         {
 
-            charger.ChargerChangeEvent += HandleChargerChangeEvent;
+            charger.ChargerConnectionValueEvent += HandleChargerChangeEvent;
         }
 
-        private void HandleChargerChangeEvent(object sender, ChargerValueEventArgs e)
+        private void HandleChargerChangeEvent(object sender, ChargerConnectionValue e)
         {
 
-            ChargerIsConnected = e.IsConnected;
+            ChargerIsConnected = e.ChargerConnected;
         }
 
         private void setLadeskabState()
