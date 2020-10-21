@@ -27,15 +27,17 @@ namespace Ladeskab.Libary
             else if (0<e.Current && e.Current<=5)
             {
                 isConnected = true;
-
+                Display.PrintUSBChargeDone();
             }
             else if (5 < e.Current && e.Current <= 500)
             {
                 isConnected = true;
+                Display.PrintUSBIsCharging();
             }
             else if (500 < e.Current)
             {
                 isConnected = true;
+                Display.PrintErrorRemovePhone();
             }
 
             ChargerConnectedChange();
@@ -58,12 +60,12 @@ namespace Ladeskab.Libary
 
         public void StartCharge()
         {
-            throw new System.NotImplementedException();
+            UsbCharger.StartCharge();
         }
 
         public void StopCharge()
         {
-            throw new System.NotImplementedException();
+            UsbCharger.StopCharge();
         }
     }
 }
