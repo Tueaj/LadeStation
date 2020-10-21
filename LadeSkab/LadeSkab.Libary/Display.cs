@@ -25,5 +25,20 @@ namespace Ladeskab.Libary
         {
             Console.WriteLine("Charger is Occupied");
         }
+
+        public void PrintUSBChargeDone()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void PrintUSBIsCharging()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void PrintErrorRemovePhone()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
