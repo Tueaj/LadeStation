@@ -4,7 +4,6 @@ namespace Ladeskab
 {
     public class DoorValueEventArgs : EventArgs
     {
-        // Value in mA (milliAmpere)
         public bool DoorOpen { set; get; }
     }
     public interface IDoor
