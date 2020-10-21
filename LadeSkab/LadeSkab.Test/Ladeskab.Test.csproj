@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LadeSkab.Libary\LadeSkab.Libary.csproj" />
     <ProjectReference Include="..\LadeSkab\LadeSkab.csproj" />
   </ItemGroup>
 
