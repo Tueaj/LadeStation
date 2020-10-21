@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="NunitXml.TestLogger" Version="2.1.62" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\LadeSkab.Libary\LadeSkab.Libary.csproj" />
   </ItemGroup>
 
