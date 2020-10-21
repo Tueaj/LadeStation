@@ -1,6 +1,7 @@
 ﻿using System;
+using Ladeskab.Libary.interfaces;
 
-namespace Ladeskab
+namespace Ladeskab.Libary
 {
     public class Door : IDoor
     {

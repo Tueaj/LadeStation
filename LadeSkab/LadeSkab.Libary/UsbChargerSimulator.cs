@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Timers;
+using Ladeskab.Libary.interfaces;
 
-namespace Ladeskab
+namespace Ladeskab.Libary
 {
     public class UsbChargerSimulator : IUsbCharger
     {

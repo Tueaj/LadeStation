@@ -1,17 +1,11 @@
 ﻿using System;
 
-namespace Ladeskab
+namespace Ladeskab.Libary
 {
-    public class RFIDDetectedEventArgs : EventArgs
+
+    public class RfidReader : IRfidReader
     {
-        public int RFID { set; get; }
-    }
-
-    public class RfidReader
-    {
-        event EventHandler<RFIDDetectedEventArgs> RFIDDetectedEvent;
-
-
+        public event EventHandler<RFIDDetectedEventArgs> RFIDDetectedEvent;
 
     }
 }
