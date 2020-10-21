@@ -19,7 +19,9 @@ namespace Ladeskab
         // Her mangler flere member variable
         private LadeskabState _state;
         private IUsbCharger _charger;
+        private IDoor _door;
         private int _oldId;
+
 
         private string logFile = "logfile.txt"; // Navnet på systemets log-fil
 
@@ -79,6 +81,13 @@ namespace Ladeskab
             }
         }
 
+        
+        
+        public StationControl(IDoor door)
+        {
+           // door.
+
+        }
         // Her mangler de andre trigger handlere
     }
 }
