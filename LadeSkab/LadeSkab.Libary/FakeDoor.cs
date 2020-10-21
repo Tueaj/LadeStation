@@ -15,12 +15,17 @@ namespace Ladeskab
         public bool DoorOpen { get; set; }
         public bool DoorLocked { get; set; }
 
+        private void DoorValueChanged()
+        {
+            DoorValueEvent?.Invoke(this, new DoorValueEventArgs() { DoorOpen = this.DoorOpen });
+        }
+
         public void OpenDoor()
         {
             if (DoorLocked == false)
             {
                 DoorOpen = true;
-                DoorValueEvent?.Invoke(this, new DoorValueEventArgs() {DoorOpen = this.DoorOpen});
+                DoorValueChanged();
             }
             else
             {
@@ -31,7 +36,7 @@ namespace Ladeskab
         public void CloseDoor()
         {
             DoorOpen = false;
-            DoorValueEvent?.Invoke(this, new DoorValueEventArgs() { DoorOpen = this.DoorOpen });
+            DoorValueChanged();
         }
 
         public void LockDoor()
