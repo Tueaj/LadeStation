@@ -272,21 +272,6 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>290</x>
-      <y>100</y>
-      <w>170</w>
-      <h>110</h>
-    </coordinates>
-    <panel_attributes>EVENTS
---
-DoorValueEvent
-RFIDDetectedEvnet
-CurrentValueEvent</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
       <x>330</x>
       <y>500</y>
       <w>100</w>

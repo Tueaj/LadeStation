@@ -9,8 +9,7 @@
     {
         static void Main(string[] args)
         {
-
-            bool finish = false;
+            /*bool finish = false;
             do
             {
                 string input;
@@ -43,7 +42,7 @@
                     default:
                         break;
                 }
-            } while (!finish);
+            } while (!finish); */
         }
     }
 }
