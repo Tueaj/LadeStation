@@ -1,4 +1,4 @@
-﻿namespace Ladeskab
+﻿namespace Ladeskab.Libary
 {
     public class LogFile
     {

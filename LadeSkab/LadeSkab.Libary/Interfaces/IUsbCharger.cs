@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ladeskab
+namespace Ladeskab.Libary.interfaces
 {
     public class CurrentEventArgs : EventArgs
     {
