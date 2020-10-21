@@ -90,20 +90,17 @@ namespace Ladeskab.Libary
         public StationControl(IDoor door)
         {
             door.DoorValueEvent += HandleDoorChangeEvent;
-
         }
 
         private void HandleDoorChangeEvent(object sender, DoorValueEventArgs e)
         {
             DoorState = e.DoorOpen;
             setLadeskabState();
-
         }
         // Her mangler de andre trigger handlere
 
         public StationControl (IChargeControl charger)
         {
-
             charger.ChargerConnectionValueEvent += HandleChargerChangeEvent;
         }
 
