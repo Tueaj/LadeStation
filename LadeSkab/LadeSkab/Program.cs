@@ -1,4 +1,6 @@
 ﻿    using System;
+    using Ladeskab.Libary.interfaces;
+    using Ladeskab.Libary;
 
     namespace Ladeskab
 {
@@ -7,7 +9,6 @@
     {
         static void Main(string[] args)
         {
-				// Assemble your system here from all the classes
 
             bool finish = false;
             do
@@ -26,7 +27,7 @@
                     case 'O':
                         OnDoorOpen();
                         break;
-
+                        
                     case 'C':
                         door.OnDoorClose();
                         break;
@@ -36,13 +37,12 @@
                         string idString = System.Console.ReadLine();
 
                         int id = Convert.ToInt32(idString);
-                        rfidReader.OnRfidRead(id);
+                        OnRfidRead(id);
                         break;
 
                     default:
                         break;
                 }
-
             } while (!finish);
         }
     }
