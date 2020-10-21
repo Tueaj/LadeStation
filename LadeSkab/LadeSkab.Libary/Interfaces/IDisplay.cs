@@ -6,7 +6,8 @@
         public void PrintReadRFID();
         public void PrintConnectionFail();
         public void PrintStationOccupied();
-
         public void PrintUSBChargeDone();
+        public void PrintUSBIsCharging();
+        public void PrintErrorRemovePhone();
     }
 }
