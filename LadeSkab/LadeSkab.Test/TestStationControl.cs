@@ -19,15 +19,17 @@ namespace Ladeskab.Test
         private  IDoor _doorSource;
         private IChargeControl _chargeControlSource;
         private IRfidReader _RfidReader;
+        private IDisplay _display;
+
         [SetUp]
         public void Setup()
         {
             _doorSource = Substitute.For<IDoor>();
 
-
+            _display = Substitute.For<IDisplay>();
             _RfidReader = Substitute.For<IRfidReader>();
             _chargeControlSource = Substitute.For<IChargeControl>();
-            _uut = new StationControl(_doorSource, _chargeControlSource, _RfidReader);
+            _uut = new StationControl(_doorSource, _chargeControlSource, _RfidReader, _display);
         }
 
         [Test]
@@ -166,6 +168,23 @@ namespace Ladeskab.Test
 
 
 
+        }
+
+        public void RFidReaderEvent_LadeskabsStateAvailableChargerConnectedFalse()
+
+        {
+            //Arrange
+            _uut._state = StationControl.LadeskabState.Available;
+            _uut.ChargerIsConnected = false;
+            RFIDDetectedEventArgs args = new RFIDDetectedEventArgs { RFID = 12345 };
+
+            //Act
+
+            _RfidReader.RFIDDetectedEvent += Raise.EventWith(args);
+
+            //Assert
+
+            Assert.AreEqual(_uut._oldId, args.RFID);
         }
 
 
