@@ -28,7 +28,7 @@ namespace Ladeskab.Libary
 
         public void PrintUSBChargeDone()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Charging is done");
         }
 
         public void PrintUSBIsCharging()

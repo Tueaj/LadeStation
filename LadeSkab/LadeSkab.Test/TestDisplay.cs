@@ -43,5 +43,20 @@ namespace Ladeskab.Test
             Assert.That(stringRes, Is.EqualTo(SW.ToString()));
         }
 
+        [Test]
+        public void PrintStationOccupied_IsPrinted()
+        {
+            _uut.PrintStationOccupied();
+            string stringRes = "Charger is Occupied\r\n";
+            Assert.That(stringRes, Is.EqualTo(SW.ToString()));
+        }
+
+        [Test]
+        public void PrintPrintUSBChargeDone_IsPrinted()
+        {
+            _uut.PrintStationOccupied();
+            string stringRes = "Charging is done\r\n";
+            Assert.That(stringRes, Is.EqualTo(SW.ToString()));
+        }
     }
 }
