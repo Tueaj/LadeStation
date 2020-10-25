@@ -79,6 +79,20 @@ namespace Ladeskab.Test
 
             display.Received().PrintUSBChargeDone();
         }
+        [Test]
+        public void TestUsbChargerCurrentIs6AndIsConnectedIsTrue()
+        {
+            usbCharger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs { Current = 6 });
+
+            Assert.True(_uut.IsConnected());
+        }
+        [Test]
+        public void TestUsbChargerCurrentIs6AndDisplayPrintUSBIsChargingIsCalled()
+        {
+            usbCharger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs { Current = 6 });
+
+            display.Received().PrintUSBIsCharging();
+        }
 
 
     };
