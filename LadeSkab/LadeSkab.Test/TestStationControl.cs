@@ -10,7 +10,7 @@ using Ladeskab.Libary.interfaces;
 using NSubstitute;
 using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities.DataCollection;
 
-namespace Ladeskab.Test
+/*namespace Ladeskab.Test
 {
     [TestFixture]
     class TestStationControl
@@ -65,4 +65,4 @@ namespace Ladeskab.Test
 
 
     }
-}
+}*/

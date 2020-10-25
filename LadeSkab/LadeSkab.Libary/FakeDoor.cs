@@ -18,7 +18,7 @@ namespace Ladeskab.Libary
 
         private void DoorValueChanged()
         {
-            DoorValueEvent?.Invoke(this, new DoorValueEventArgs() { DoorOpen = this.DoorOpen });
+            DoorValueEvent?.Invoke(this, new DoorValueEventArgs() {DoorOpen = this.DoorOpen});
         }
 
         public void OpenDoor()
@@ -42,8 +42,17 @@ namespace Ladeskab.Libary
 
         public void LockDoor()
         {
-            DoorLocked = true;
-            Console.WriteLine("Message from door: Door is now LOCKED");
+            if (DoorOpen == false)
+            {
+                DoorLocked = true;
+                Console.WriteLine("Message from door: Door is now LOCKED");
+            }
+            else
+            {
+                Console.WriteLine("Message from door: Door can't be locked while it's not closed");
+            }
+            
+            
         }
 
         public void UnlockDoor()

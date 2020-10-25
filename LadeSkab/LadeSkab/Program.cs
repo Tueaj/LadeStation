@@ -9,7 +9,7 @@
     {
         static void Main(string[] args)
         {
-            IDoor door = new FakeDoor();
+            /*IDoor door = new FakeDoor();
             IChargeControl chargeControl = new ChargeControl();
 
             StationControl stationControl = new StationControl(door, chargeControl);
@@ -48,7 +48,7 @@
                     default:
                         break;
                 }
-            } while (!finish);
+           } while (!finish);*/
         }
     }
     }
