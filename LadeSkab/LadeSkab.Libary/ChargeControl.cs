@@ -5,16 +5,17 @@ namespace Ladeskab.Libary
 {
     public class ChargeControl : IChargeControl
     {
+        private IUsbCharger usbCharger;
         public IUsbCharger UsbCharger
         {
             get
             {
-                return UsbCharger;
+                return usbCharger;
             }
             set
             {
-                UsbCharger = value;
-                UsbCharger.CurrentValueEvent += HandleCurrentEvent;
+                usbCharger = value;
+                usbCharger.CurrentValueEvent += HandleCurrentEvent;
             }
         }
 
