@@ -27,5 +27,13 @@ namespace Ladeskab.Test
             Assert.That(stringRes, Is.EqualTo(SW.ToString()));
         }
 
+        [Test]
+        public void PrintReadRFID_IsPrinted()
+        {
+            _uut.PrintReadRFID();
+            string stringRes = "Scan your RFID key\r\n";
+            Assert.That(stringRes, Is.EqualTo(SW.ToString()));
+        }
+
     }
 }
