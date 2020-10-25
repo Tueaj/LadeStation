@@ -104,7 +104,7 @@ namespace Ladeskab.Test
         }
 
         [Test]
-        public void DoorvalueChanged()
+        public void DoorvalueChanged_valueChanges_sendsEvent()
         {
             bool WasRaise = false;
             _uut.DoorValueEvent += delegate { WasRaise = true; };
