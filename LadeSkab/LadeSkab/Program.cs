@@ -9,12 +9,12 @@
     {
         static void Main(string[] args)
         {
-            /*IDoor door = new FakeDoor();
+            IDoor door = new FakeDoor();
             IChargeControl chargeControl = new ChargeControl();
-
-            StationControl stationControl = new StationControl(door, chargeControl);
+            IDisplay display = new Display();
             IRfidReader riRfidReader = new FakeRfidReader();
-            
+            StationControl stationControl = new StationControl(door, chargeControl, riRfidReader, display);
+
             bool finish = false;
             do
             {
@@ -48,7 +48,7 @@
                     default:
                         break;
                 }
-           } while (!finish);*/
+            } while (!finish);
         }
     }
     }

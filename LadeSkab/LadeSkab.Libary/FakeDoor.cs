@@ -13,7 +13,24 @@ namespace Ladeskab.Libary
             DoorLocked = false;
         }
 
-        public bool DoorOpen { get; set; }
+        private bool doorOpen;
+        public bool DoorOpen
+        {
+            get => doorOpen;
+            set
+            {
+                if (DoorLocked == false)
+                {
+                    doorOpen = value;
+                    DoorValueChanged();
+                }
+                else
+                {
+                    Console.WriteLine("Message from door: Door is locked, and cant be opened");
+                }
+            }
+        }
+
         public bool DoorLocked { get; set; }
 
         private void DoorValueChanged()

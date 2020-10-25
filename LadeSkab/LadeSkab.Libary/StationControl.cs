@@ -104,8 +104,6 @@ namespace Ladeskab.Libary
         
        private void  RFidDetectedEvent(object sender, RFIDDetectedEventArgs e)
         {
-
-           
             RfidDetected(e.RFID);
         }
 
