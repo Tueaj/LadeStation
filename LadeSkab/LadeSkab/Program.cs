@@ -7,9 +7,20 @@
     
     class Program
     {
+        private void OnDoorOpen()
+        {
+
+        }
+
         static void Main(string[] args)
         {
-            /*bool finish = false;
+            IDoor door = new FakeDoor();
+            IChargeControl chargeControl = new ChargeControl();
+
+            StationControl stationControl = new StationControl(door, chargeControl);
+            IRfidReader riRfidReader = new FakeRfidReader();
+            
+            bool finish = false;
             do
             {
                 string input;
@@ -24,11 +35,11 @@
                         break;
 
                     case 'O':
-                        OnDoorOpen();
+                        door.DoorOpen = true;
                         break;
                         
                     case 'C':
-                        door.OnDoorClose();
+                        door.DoorOpen = false;
                         break;
 
                     case 'R':
@@ -36,13 +47,13 @@
                         string idString = System.Console.ReadLine();
 
                         int id = Convert.ToInt32(idString);
-                        OnRfidRead(id);
+                        riRfidReader.ScanRFID(id);
                         break;
 
                     default:
                         break;
                 }
-            } while (!finish); */
+            } while (!finish);
         }
     }
 }

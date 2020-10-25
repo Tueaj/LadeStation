@@ -6,7 +6,7 @@ namespace Ladeskab
     {
         public event EventHandler<RFIDDetectedEventArgs> RFIDDetectedEvent;
 
-        public void FakeScanRFID(int id)
+        public void ScanRFID(int id)
         {
             RFIDDetected(id);
         }

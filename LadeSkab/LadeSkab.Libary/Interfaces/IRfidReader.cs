@@ -9,5 +9,7 @@ namespace Ladeskab
     public interface IRfidReader
     {
         event EventHandler<RFIDDetectedEventArgs> RFIDDetectedEvent;
+
+        public void ScanRFID(int id);
     }
 }
