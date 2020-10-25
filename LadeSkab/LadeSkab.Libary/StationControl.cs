@@ -22,20 +22,25 @@ namespace Ladeskab.Libary
         public bool ChargerIsConnected = false;
         public LadeskabState _state;
         private IChargeControl _charger;
+        private IRfidReader _reader;
         private IDoor _door;
         public int _oldId = 0;
 
 
         private string logFile = "logfile.txt"; // Navnet på systemets log-fil
 
-        public StationControl(IDoor door, IChargeControl charger)
+        public StationControl(IDoor door, IChargeControl charger, IRfidReader reader)
         {
             _door = door;
+            _reader = reader;
             _door.DoorValueEvent += HandleDoorChangeEvent;
             _charger = charger;
             _charger.ChargerConnectionValueEvent += HandleChargerChangeEvent;
+            _reader.RFIDDetectedEvent += RFidDetectedEvent;
         }
-       
+
+        
+
 
         // Eksempel på event handler for eventet "RFID Detected" fra tilstandsdiagrammet for klassen
         private void RfidDetected(int id)
@@ -66,6 +71,7 @@ namespace Ladeskab.Libary
 
                 case LadeskabState.DoorOpen:
                     // Ignore
+                    Console.WriteLine("Døren er åben");
                     break;
 
                 case LadeskabState.Locked:
