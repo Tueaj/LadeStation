@@ -29,14 +29,14 @@ namespace Ladeskab.Libary
 
         private string logFile = "logfile.txt"; // Navnet på systemets log-fil
 
-        // Her mangler constructor
-
-       public StationControl ()
+        public StationControl(IDoor door, IChargeControl charger)
         {
-            IDoor _door = new Door();
-            IChargeControl _charger = new ChargeControl();
-
+            _door = door;
+            _door.DoorValueEvent += HandleDoorChangeEvent;
+            _charger = charger;
+            _charger.ChargerConnectionValueEvent += HandleChargerChangeEvent;
         }
+       
 
         // Eksempel på event handler for eventet "RFID Detected" fra tilstandsdiagrammet for klassen
         private void RfidDetected(int id)
@@ -95,11 +95,7 @@ namespace Ladeskab.Libary
 
         
         
-        public StationControl(IDoor door, IChargeControl charger)
-        {
-            door.DoorValueEvent += HandleDoorChangeEvent;
-            charger.ChargerConnectionValueEvent += HandleChargerChangeEvent;
-        }
+       
 
         private void HandleDoorChangeEvent(object sender, DoorValueEventArgs e)
         {
@@ -120,7 +116,6 @@ namespace Ladeskab.Libary
 
             if( DoorState)
             {
-
                 _state = LadeskabState.DoorOpen;
             }
             else if(_oldId == 0 && DoorState == false && ChargerIsConnected == true)
@@ -129,7 +124,6 @@ namespace Ladeskab.Libary
             }
             else
             {
-
                 _state = LadeskabState.DoorOpen;
             }
            
