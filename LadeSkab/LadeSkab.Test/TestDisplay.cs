@@ -74,5 +74,39 @@ namespace Ladeskab.Test
             string stringRes = "An Error has occurred please remove phone\r\n";
             Assert.That(stringRes, Is.EqualTo(SW.ToString()));
         }
+
+        [Test]
+        public void PrintStationLockedUseID_IsPrinted()
+        {
+            _uut.PrintStationLockedUseID();
+            string stringRes = "Station locked, use RFid to unlock\r\n";
+            Assert.That(stringRes, Is.EqualTo(SW.ToString()));
+        }
+
+        [Test]
+        public void PrintDoorIsOpen_IsPrinted()
+        {
+            _uut.PrintDoorIsOpen();
+            string stringRes = "Door is open\r\n";
+            Assert.That(stringRes, Is.EqualTo(SW.ToString()));
+        }
+
+        [Test]
+        public void PrintTakePhoneCloseDoor_IsPrinted()
+        {
+            _uut.PrintTakePhoneCloseDoor();
+            string stringRes = "Take phone, close door\r\n";
+            Assert.That(stringRes, Is.EqualTo(SW.ToString()));
+        }
+
+        [Test]
+        public void PrintWrongRFidTag_IsPrinted()
+        {
+            _uut.PrintWrongRFidTag();
+            string stringRes = "wrong RFid\r\n";
+            Assert.That(stringRes, Is.EqualTo(SW.ToString()));
+        }
+
+
     }
 }
