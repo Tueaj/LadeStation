@@ -11,20 +11,19 @@ namespace Ladeskab.Libary
     public class StationControl
     {
         // Enum med tilstande ("states") svarende til tilstandsdiagrammet for klassen
-        private enum LadeskabState
+        public enum LadeskabState
         {
             Available,
             Locked,
             DoorOpen
         };
 
-        private bool DoorState = true;
-        private bool ChargerIsConnected = false;
-        // Her mangler flere member variable
-        private LadeskabState _state;
+        public bool DoorState = true;
+        public bool ChargerIsConnected = false;
+        public LadeskabState _state;
         private IChargeControl _charger;
         private IDoor _door;
-        private int _oldId = 0;
+        public int _oldId = 0;
 
 
         private string logFile = "logfile.txt"; // Navnet på systemets log-fil
@@ -52,7 +51,7 @@ namespace Ladeskab.Libary
                         _oldId = id;
                         using (var writer = File.AppendText(logFile))
                         {
-                            writer.WriteLine(DateTime.Now + ": Skab låst med RFID: {0}", id);
+                            writer.WriteLine(DateTime.Now + ": Skab låst med RFID: {0}", _oldId);
                         }
 
                         Console.WriteLine("Skabet er låst og din telefon lades. Brug dit RFID tag til at låse op.");
@@ -95,7 +94,12 @@ namespace Ladeskab.Libary
 
         
         
-       
+       private void  RFidDetectedEvent(object sender, RFIDDetectedEventArgs e)
+        {
+
+           
+            RfidDetected(e.RFID);
+        }
 
         private void HandleDoorChangeEvent(object sender, DoorValueEventArgs e)
         {
