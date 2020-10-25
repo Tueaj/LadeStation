@@ -124,11 +124,9 @@ namespace Ladeskab.Libary
         private void setLadeskabState()
         {
 
-            if( DoorState)
-            {
-                _state = LadeskabState.DoorOpen;
-            }
-            else if(_oldId == 0 && DoorState == false && ChargerIsConnected == true)
+          
+           
+            if(_oldId == 0 && DoorState == false && ChargerIsConnected == false)
             {
                 _state = LadeskabState.Available;
             }

@@ -128,6 +128,47 @@ namespace Ladeskab.Test
             
         }
 
+        [Test]
+        public void RFidReaderEvent_LadeskabsStateLocked_WrongID()
+        {
+            //Arrange
+            _uut._state = StationControl.LadeskabState.Locked;
+            _uut._oldId = 54321;
+            RFIDDetectedEventArgs args = new RFIDDetectedEventArgs { RFID = 12345 };
+            //Act
+
+            _RfidReader.RFIDDetectedEvent += Raise.EventWith(args);
+
+            //Assert
+            _doorSource.DidNotReceive().LockDoor();
+            _doorSource.DidNotReceive().UnlockDoor();
+            _chargeControlSource.DidNotReceive().StartCharge();
+            _chargeControlSource.DidNotReceive().StopCharge();
+
+
+        }
+
+        [Test]
+        public void RFidReaderEvent_LadeskabsStateLocked_rightID()
+        {
+            //Arrange
+            _uut._state = StationControl.LadeskabState.Locked;
+            _uut._oldId = 12345;
+            RFIDDetectedEventArgs args = new RFIDDetectedEventArgs { RFID = 12345 };
+            //Act
+
+            _RfidReader.RFIDDetectedEvent += Raise.EventWith(args);
+
+            //Assert
+            _chargeControlSource.Received().StopCharge();
+            _doorSource.Received().UnlockDoor();
+            Assert.IsTrue(_uut._oldId == 0);
+
+
+
+        }
+
+
 
 
 
