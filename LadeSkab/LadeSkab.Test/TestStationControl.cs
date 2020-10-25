@@ -10,7 +10,7 @@ using Ladeskab.Libary.interfaces;
 using NSubstitute;
 using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities.DataCollection;
 
-/*namespace Ladeskab.Test
+namespace Ladeskab.Test
 {
     [TestFixture]
     class TestStationControl
@@ -18,15 +18,18 @@ using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities.DataCollection;
         private StationControl _uut;
         private  IDoor _doorSource;
         private IChargeControl _chargeControlSource;
+        private IRfidReader _RfidReader;
+        private IDisplay _display;
+
         [SetUp]
         public void Setup()
         {
             _doorSource = Substitute.For<IDoor>();
 
-
-
+            _display = Substitute.For<IDisplay>();
+            _RfidReader = Substitute.For<IRfidReader>();
             _chargeControlSource = Substitute.For<IChargeControl>();
-            _uut = new StationControl(_doorSource, _chargeControlSource);
+            _uut = new StationControl(_doorSource, _chargeControlSource, _RfidReader, _display);
         }
 
         [Test]
@@ -59,10 +62,135 @@ using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities.DataCollection;
 
         }
 
+        [Test]
+        public void ChargerEvent_ChargeIsConnectedFalse_ChargerStateIsFalse()
+        {
+            //Arrange
+
+            //Act
+            _chargeControlSource.ChargerConnectionValueEvent += Raise.EventWith(new ChargerConnectionValue { ChargerConnected = false });
+
+            //Assert
+
+            Assert.IsFalse(_uut.ChargerIsConnected);
+
+
+        }
+
+        [Test]
+        public void ChargerEvent_ChargeIsConnectedTrue_ChargerStateIsTue()
+        {
+            //Arrange
+
+            //Act
+            _chargeControlSource.ChargerConnectionValueEvent += Raise.EventWith(new ChargerConnectionValue { ChargerConnected = true });
+
+            //Assert
+
+            Assert.IsTrue(_uut.ChargerIsConnected);
+
+
+        }
+        [Test]
+        public void RFidReaderEvent_LadeskabsStateAvailable_OldIDsetToEventID()
+
+        {
+            //Arrange
+            _uut._state = StationControl.LadeskabState.Available;
+            _uut.ChargerIsConnected = true;
+            RFIDDetectedEventArgs args = new RFIDDetectedEventArgs { RFID = 12345 };
+
+            //Act
+
+            _RfidReader.RFIDDetectedEvent += Raise.EventWith(args);
+
+            //Assert
+
+            Assert.AreEqual(_uut._oldId, args.RFID);
+        }
+
+        [Test]
+        public void RFidReaderEvent_LadeskabsDoorOpen_NothingisDone()
+
+        {
+            //Arrange
+            _uut._state = StationControl.LadeskabState.DoorOpen;
+            RFIDDetectedEventArgs args = new RFIDDetectedEventArgs { RFID = 12345 };
+
+            //Act
+
+            _RfidReader.RFIDDetectedEvent += Raise.EventWith(args);
+
+            //Assert
+
+            _doorSource.DidNotReceive().LockDoor();
+            _doorSource.DidNotReceive().UnlockDoor();
+            _chargeControlSource.DidNotReceive().StartCharge();
+            _chargeControlSource.DidNotReceive().StopCharge();
+            
+        }
+
+        [Test]
+        public void RFidReaderEvent_LadeskabsStateLocked_WrongID()
+        {
+            //Arrange
+            _uut._state = StationControl.LadeskabState.Locked;
+            _uut._oldId = 54321;
+            RFIDDetectedEventArgs args = new RFIDDetectedEventArgs { RFID = 12345 };
+            //Act
+
+            _RfidReader.RFIDDetectedEvent += Raise.EventWith(args);
+
+            //Assert
+            _doorSource.DidNotReceive().LockDoor();
+            _doorSource.DidNotReceive().UnlockDoor();
+            _chargeControlSource.DidNotReceive().StartCharge();
+            _chargeControlSource.DidNotReceive().StopCharge();
+
+
+        }
+
+        [Test]
+        public void RFidReaderEvent_LadeskabsStateLocked_rightID()
+        {
+            //Arrange
+            _uut._state = StationControl.LadeskabState.Locked;
+            _uut._oldId = 12345;
+            RFIDDetectedEventArgs args = new RFIDDetectedEventArgs { RFID = 12345 };
+            //Act
+
+            _RfidReader.RFIDDetectedEvent += Raise.EventWith(args);
+
+            //Assert
+            _chargeControlSource.Received().StopCharge();
+            _doorSource.Received().UnlockDoor();
+            Assert.IsTrue(_uut._oldId == 0);
+
+
+
+        }
+
+        public void RFidReaderEvent_LadeskabsStateAvailableChargerConnectedFalse()
+
+        {
+            //Arrange
+            _uut._state = StationControl.LadeskabState.Available;
+            _uut.ChargerIsConnected = false;
+            RFIDDetectedEventArgs args = new RFIDDetectedEventArgs { RFID = 12345 };
+
+            //Act
+
+            _RfidReader.RFIDDetectedEvent += Raise.EventWith(args);
+
+            //Assert
+
+            Assert.AreEqual(_uut._oldId, args.RFID);
+        }
+
 
 
 
 
 
     }
-}*/
+}
