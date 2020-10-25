@@ -17,10 +17,8 @@ namespace Ladeskab.Test
         public void Setup()
         {
             IChargeControl charger = new ChargeControl();
-            _uut = new StationControl(charger);
-
             IDoor door = new Door();
-            _uut = new StationControl(door);
+            _uut = new StationControl(door,charger);
         }
     }
 }

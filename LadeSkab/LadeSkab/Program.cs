@@ -2,16 +2,11 @@
     using Ladeskab.Libary.interfaces;
     using Ladeskab.Libary;
 
-    namespace Ladeskab
-{
+    namespace Ladeskab 
+    {
     
     class Program
     {
-        private void OnDoorOpen()
-        {
-
-        }
-
         static void Main(string[] args)
         {
             IDoor door = new FakeDoor();
@@ -56,4 +51,4 @@
             } while (!finish);
         }
     }
-}
+    }
