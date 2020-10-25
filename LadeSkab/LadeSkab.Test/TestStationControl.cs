@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Ladeskab.Libary;
 using Ladeskab.Libary.interfaces;
 
-namespace Ladeskab.Test
+/*namespace Ladeskab.Test
 {
     class TestStationControl
     {
@@ -23,4 +23,4 @@ namespace Ladeskab.Test
             _uut = new StationControl(door);
         }
     }
-}
+}*/
