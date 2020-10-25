@@ -31,9 +31,10 @@ namespace Ladeskab.Test
         public void OpenDoor_DoorOpenIsFalse_IsTrue()
         {
             _uut.DoorOpen = false;
+            _uut.DoorLocked = true;
             _uut.OpenDoor();
 
-            Assert.That(_uut.DoorOpen, Is.True);
+            Assert.That(_uut.DoorOpen, Is.False);
         }
 
         [Test]
@@ -50,7 +51,6 @@ namespace Ladeskab.Test
         public void CloseDoor_DoorOpenIsFalse_IsFalse()
         {
             _uut.DoorOpen = false;
-            _uut.DoorLocked = true;
             _uut.CloseDoor();
 
             Assert.That(_uut.DoorOpen, Is.False);
