@@ -40,5 +40,27 @@ namespace Ladeskab.Libary
         {
             Console.WriteLine("An Error has occurred please remove phone");
         }
+
+        public void PrintStationLockedUseID()
+        {
+
+            Console.WriteLine("Station locked, use RFid to unlock");
+        }
+
+        public void PrintDoorIsOpen()
+        {
+            Console.WriteLine("Door is open");
+        }
+
+        public void PrintTakePhoneCloseDoor()
+        {
+            Console.WriteLine("Take phone, close door");
+        }
+
+        public void PrintWrongRFidTag()
+        {
+
+            Console.WriteLine("wrong RFid");
+        }
     }
 }

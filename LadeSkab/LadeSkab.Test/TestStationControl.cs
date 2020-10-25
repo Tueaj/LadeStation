@@ -169,7 +169,7 @@ namespace Ladeskab.Test
 
 
         }
-
+        [Test]
         public void RFidReaderEvent_LadeskabsStateAvailableChargerConnectedFalse()
 
         {
@@ -184,7 +184,7 @@ namespace Ladeskab.Test
 
             //Assert
 
-            Assert.AreEqual(_uut._oldId, args.RFID);
+            _display.Received().PrintConnectionFail();
         }
 
 
