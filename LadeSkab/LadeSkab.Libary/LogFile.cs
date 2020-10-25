@@ -6,22 +6,34 @@ namespace Ladeskab.Libary
 {
     public class LogFile
     {
+        private TextWriter TW;
+        public DateTime? DT = null;
+
+        public LogFile(TextWriter tw)
+        {
+            TW = tw;
+        }
+
+        private DateTime? getTime()
+        {
+            if (DT == null)
+            {
+                return DateTime.Now;
+            }
+            else
+            {
+                return DT;
+            }
+        }
+
         public void LogDoorLocked(int id)
         {
-            using (StreamWriter writer = new StreamWriter("logfile.txt"))
-            {
-                DateTime DateString = DateTime.Now;
-                writer.WriteLine("{0}: Time for door locked with RFid: {1}", DateString.ToString(), id);
-            }
+            TW.WriteLine("{0}: Time for door locked with RFid: {1}",getTime().ToString(), id);
         }
 
         public void LogDoorUnlocked(int id)
         {
-            using (StreamWriter writer = new StreamWriter("logfile.txt"))
-            {
-                DateTime DateString = DateTime.Now;
-                Console.WriteLine("{0}: Time for door Unlocked with RFid: {1}", DateString.ToString(), id);
-            }
+            TW.WriteLine("{0}: Time for door Unlocked with RFid: {1}", getTime().ToString(), id);
         }
 
     }
