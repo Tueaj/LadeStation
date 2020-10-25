@@ -8,7 +8,7 @@ namespace Ladeskab.Libary
     {
         public void LogDoorLocked(int id)
         {
-            using (StreamWriter writer = new StreamWriter("log.txt"))
+            using (StreamWriter writer = new StreamWriter("logfile.txt"))
             {
                 DateTime DateString = DateTime.Now;
                 writer.WriteLine("{0}: Time for door locked with RFid: {1}", DateString.ToString(), id);
@@ -17,7 +17,7 @@ namespace Ladeskab.Libary
 
         public void LogDoorUnlocked(int id)
         {
-            using (StreamWriter writer = new StreamWriter("log.txt"))
+            using (StreamWriter writer = new StreamWriter("logfile.txt"))
             {
                 DateTime DateString = DateTime.Now;
                 Console.WriteLine("{0}: Time for door Unlocked with RFid: {1}", DateString.ToString(), id);
