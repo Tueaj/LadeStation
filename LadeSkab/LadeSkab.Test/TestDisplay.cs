@@ -35,5 +35,13 @@ namespace Ladeskab.Test
             Assert.That(stringRes, Is.EqualTo(SW.ToString()));
         }
 
+        [Test]
+        public void PrintConnectionFail_IsPrinted()
+        {
+            _uut.PrintConnectionFail();
+            string stringRes = "Connection failed, unplug phone\r\n";
+            Assert.That(stringRes, Is.EqualTo(SW.ToString()));
+        }
+
     }
 }
