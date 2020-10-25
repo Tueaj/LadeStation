@@ -33,12 +33,12 @@ namespace Ladeskab.Libary
 
         public void PrintUSBIsCharging()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Phone is now charging");
         }
 
         public void PrintErrorRemovePhone()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("An Error has occurred please remove phone");
         }
     }
 }

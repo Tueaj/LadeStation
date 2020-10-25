@@ -54,8 +54,24 @@ namespace Ladeskab.Test
         [Test]
         public void PrintPrintUSBChargeDone_IsPrinted()
         {
-            _uut.PrintStationOccupied();
+            _uut.PrintUSBChargeDone();
             string stringRes = "Charging is done\r\n";
+            Assert.That(stringRes, Is.EqualTo(SW.ToString()));
+        }
+
+        [Test]
+        public void PrintUSBIsCharging_IsPrinted()
+        {
+            _uut.PrintUSBIsCharging();
+            string stringRes = "Phone is now charging\r\n";
+            Assert.That(stringRes, Is.EqualTo(SW.ToString()));
+        }
+
+        [Test]
+        public void PrintErrorRemovePhone_IsPrinted()
+        {
+            _uut.PrintErrorRemovePhone();
+            string stringRes = "An Error has occurred please remove phone\r\n";
             Assert.That(stringRes, Is.EqualTo(SW.ToString()));
         }
     }
