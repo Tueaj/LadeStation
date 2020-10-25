@@ -31,6 +31,13 @@ namespace Ladeskab.Libary
 
         // Her mangler constructor
 
+       public StationControl ()
+        {
+            IDoor _door = new Door();
+            IChargeControl _charger = new ChargeControl();
+
+        }
+
         // Eksempel på event handler for eventet "RFID Detected" fra tilstandsdiagrammet for klassen
         private void RfidDetected(int id)
         {
