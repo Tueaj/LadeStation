@@ -18,6 +18,7 @@ namespace Ladeskab.Test
         private IUsbCharger usbCharger;
 
         private IDisplay display;
+        private bool ChargerConnectionValueEventRaised { get; set; }
 
         [SetUp]
         public void Setup()
@@ -28,7 +29,10 @@ namespace Ladeskab.Test
             _uut = new ChargeControl();
             _uut.UsbCharger = usbCharger;
             _uut.Display = display;
-
+            _uut.ChargerConnectionValueEvent += (sender, args) =>
+            {
+                ChargerConnectionValueEventRaised = true;
+            };
         }
         [Test]
         public void TestStartChargeIsCalled()
@@ -43,7 +47,14 @@ namespace Ladeskab.Test
             _uut.StopCharge();
             usbCharger.Received().StopCharge();
         }
+        [Test]
+        public void TestUsbChargerCurrentIsMinus1AndIsConnectedIsFalse()
+        {
+            usbCharger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs { Current = -1 });
 
+            Assert.IsTrue(ChargerConnectionValueEventRaised);
+        }
+        
         [Test]
         public void TestUsbChargerCurrentIs0AndIsConnectedIsFalse()
         {
@@ -121,8 +132,5 @@ namespace Ladeskab.Test
 
             display.Received().PrintErrorRemovePhone();
         }
-
-
-
     };
 }
