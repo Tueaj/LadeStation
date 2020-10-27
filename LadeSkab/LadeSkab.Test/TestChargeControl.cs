@@ -26,9 +26,7 @@ namespace Ladeskab.Test
             usbCharger = Substitute.For<IUsbCharger>();
             display = Substitute.For<IDisplay>();
 
-            _uut = new ChargeControl(null);
-            _uut.UsbCharger = usbCharger;
-            _uut.Display = display;
+            _uut = new ChargeControl(usbCharger,display);
             _uut.ChargerConnectionValueEvent += (sender, args) =>
             {
                 ChargerConnectionValueEventRaised = true;
