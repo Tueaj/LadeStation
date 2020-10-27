@@ -116,22 +116,22 @@ namespace Ladeskab.Libary
         {
 
             ChargerIsConnected = e.ChargerConnected;
-            setLadeskabState();
+            //setLadeskabState();
         }
 
         private void setLadeskabState()
         {
-            //Fatter ikke helt det her, hvornår er skabet lukket men ikke låst ? - Tue
-            if(_oldId == 0 && DoorState == false && ChargerIsConnected == false)
+            if(_oldId == 0 && DoorState == false) //&& ChargerIsConnected == false
             {
                 _state = LadeskabState.Available;
-                _display.PrintConnectPhone();
                 _display.PrintReadRFID();
             }
-            else
+            else 
             {
                 _state = LadeskabState.DoorOpen;
+                _display.PrintConnectPhone();
             }
+            
            
         }
     }

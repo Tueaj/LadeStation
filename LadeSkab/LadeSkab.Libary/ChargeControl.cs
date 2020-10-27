@@ -6,9 +6,10 @@ namespace Ladeskab.Libary
 {
     public class ChargeControl : IChargeControl
     {
-        public ChargeControl(IUsbCharger _usbCharger)
+        public ChargeControl(IUsbCharger _usbCharger, IDisplay display)
         {
             UsbCharger = _usbCharger;
+            Display = display;
         }
 
         private IUsbCharger usbCharger;
@@ -56,7 +57,14 @@ namespace Ladeskab.Libary
         }
 
         public event EventHandler<ChargerConnectionValue> ChargerConnectionValueEvent;
-        public IDisplay Display { get; set; }
+
+        public IDisplay Display
+        {
+            get { return display; }
+            set { display = value; }
+        }
+
+        private IDisplay display;
 
         private bool isConnected;
 
