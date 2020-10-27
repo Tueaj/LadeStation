@@ -110,8 +110,7 @@ namespace Ladeskab.Test
         }
 
         [Test]
-        public void RFidReaderEvent_LadeskabsDoorOpen_NothingisDone()
-
+        public void RFidReaderEvent_LadeskabsDoorOpen_DoorRecivedNoCalls()
         {
             //Arrange
             _uut._state = StationControl.LadeskabState.DoorOpen;
@@ -122,16 +121,26 @@ namespace Ladeskab.Test
             _RfidReader.RFIDDetectedEvent += Raise.EventWith(args);
 
             //Assert
-
-            _doorSource.DidNotReceive().LockDoor();
-            _doorSource.DidNotReceive().UnlockDoor();
-            _chargeControlSource.DidNotReceive().StartCharge();
-            _chargeControlSource.DidNotReceive().StopCharge();
-            
+            Assert.That((_doorSource.ReceivedCalls().Count()),Is.EqualTo(1));
         }
 
         [Test]
-        public void RFidReaderEvent_LadeskabsStateLocked_WrongID()
+        public void RFidReaderEvent_LadeskabsDoorOpen_ChargeControlRecivedNoCalls()
+        {
+            //Arrange
+            _uut._state = StationControl.LadeskabState.DoorOpen;
+            RFIDDetectedEventArgs args = new RFIDDetectedEventArgs {RFID = 12345};
+
+            //Act
+
+            _RfidReader.RFIDDetectedEvent += Raise.EventWith(args);
+
+            //Assert
+            Assert.That((_chargeControlSource.ReceivedCalls().Count()), Is.EqualTo(1));
+        }
+
+        [Test]
+        public void RFidReaderEvent_LadeskabsStateLockedWrongID_DoorRecivedNoCalls()
         {
             //Arrange
             _uut._state = StationControl.LadeskabState.Locked;
@@ -142,12 +151,21 @@ namespace Ladeskab.Test
             _RfidReader.RFIDDetectedEvent += Raise.EventWith(args);
 
             //Assert
-            _doorSource.DidNotReceive().LockDoor();
-            _doorSource.DidNotReceive().UnlockDoor();
-            _chargeControlSource.DidNotReceive().StartCharge();
-            _chargeControlSource.DidNotReceive().StopCharge();
+            Assert.That((_doorSource.ReceivedCalls().Count()), Is.EqualTo(1));
+        }
+        [Test]
+        public void RFidReaderEvent_LadeskabsStateLockedWrongID_ChargeControlRecivedNoCalls()
+        {
+            //Arrange
+            _uut._state = StationControl.LadeskabState.Locked;
+            _uut._oldId = 54321;
+            RFIDDetectedEventArgs args = new RFIDDetectedEventArgs { RFID = 12345 };
+            //Act
 
+            _RfidReader.RFIDDetectedEvent += Raise.EventWith(args);
 
+            //Assert
+            Assert.That((_chargeControlSource.ReceivedCalls().Count()), Is.EqualTo(1));
         }
 
         [Test]
