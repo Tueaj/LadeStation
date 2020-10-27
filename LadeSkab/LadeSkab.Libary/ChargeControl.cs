@@ -1,10 +1,16 @@
 ﻿using System;
+using System.Dynamic;
 using Ladeskab.Libary.interfaces;
 
 namespace Ladeskab.Libary
 {
     public class ChargeControl : IChargeControl
     {
+        public ChargeControl(IUsbCharger _usbCharger)
+        {
+            UsbCharger = _usbCharger;
+        }
+
         private IUsbCharger usbCharger;
         public IUsbCharger UsbCharger
         {
@@ -23,21 +29,21 @@ namespace Ladeskab.Libary
         {
             if (e.Current == 0)
             {
-                isConnected = false;
+                IsConnected = false;
             }
             else if (0<e.Current && e.Current<=5)
             {
-                isConnected = true;
+                IsConnected = true;
                 Display.PrintUSBChargeDone();
             }
             else if (5 < e.Current && e.Current <= 500)
             {
-                isConnected = true;
+                IsConnected = true;
                 Display.PrintUSBIsCharging();
             }
             else if (500 < e.Current)
             {
-                isConnected = true;
+                IsConnected = true;
                 Display.PrintErrorRemovePhone();
             }
 
@@ -46,18 +52,27 @@ namespace Ladeskab.Libary
 
         private void ChargerConnectedChange()
         {
-            ChargerConnectionValueEvent?.Invoke(this, new ChargerConnectionValue() { ChargerConnected = this.isConnected });
+            ChargerConnectionValueEvent?.Invoke(this, new ChargerConnectionValue() { ChargerConnected = this.IsConnected });
         }
 
         public event EventHandler<ChargerConnectionValue> ChargerConnectionValueEvent;
         public IDisplay Display { get; set; }
-        
-        private bool isConnected { get; set; }
 
-        public bool IsConnected()
+        private bool isConnected;
+
+        public bool IsConnected
         {
-            return isConnected;
+            get
+            {
+                return isConnected;
+            }
+            set
+            {
+                isConnected = value;
+                ChargerConnectedChange();
+            }
         }
+
 
         public void StartCharge()
         {

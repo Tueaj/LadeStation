@@ -41,12 +41,9 @@ namespace Ladeskab.Libary
             _reader.RFIDDetectedEvent += RFidDetectedEvent;
         }
 
-        
-
-
-        // Eksempel på event handler for eventet "RFID Detected" fra tilstandsdiagrammet for klassen
         private void RfidDetected(int id)
         {
+            
             switch (_state)
             {
                 case LadeskabState.Available:
@@ -94,6 +91,7 @@ namespace Ladeskab.Libary
                     else
                     {
                         _display.PrintWrongRFidTag();
+                        _display.PrintStationOccupied();
                     }
 
                     break;
@@ -112,7 +110,7 @@ namespace Ladeskab.Libary
             DoorState = e.DoorOpen;
             setLadeskabState();
         }
-        // Her mangler de andre trigger handlere
+        // Her mangler de andre trigger handlere --- Hvilke ?? - Tue
 
         private void HandleChargerChangeEvent(object sender, ChargerConnectionValue e)
         {
@@ -123,12 +121,12 @@ namespace Ladeskab.Libary
 
         private void setLadeskabState()
         {
-
-          
-           
+            //Fatter ikke helt det her, hvornår er skabet lukket men ikke låst ? - Tue
             if(_oldId == 0 && DoorState == false && ChargerIsConnected == false)
             {
                 _state = LadeskabState.Available;
+                _display.PrintConnectPhone();
+                _display.PrintReadRFID();
             }
             else
             {

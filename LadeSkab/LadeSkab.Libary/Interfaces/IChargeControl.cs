@@ -10,8 +10,8 @@ namespace Ladeskab.Libary.interfaces
     {
         event EventHandler<ChargerConnectionValue> ChargerConnectionValueEvent;
         public IDisplay Display { get; set; }
-        public bool IsConnected();
         public void StartCharge();
         public void StopCharge();
+        public bool IsConnected { get; set; }
     }
 }

@@ -10,39 +10,45 @@
         static void Main(string[] args)
         {
             IDoor door = new FakeDoor();
-            IChargeControl chargeControl = new ChargeControl();
+            IUsbCharger usbCharger = new UsbChargerSimulator();
+            IChargeControl chargeControl = new ChargeControl(usbCharger);
             IDisplay display = new Display();
             IRfidReader riRfidReader = new FakeRfidReader();
             StationControl stationControl = new StationControl(door, chargeControl, riRfidReader, display);
-
             bool finish = false;
             do
             {
                 string input;
-                System.Console.WriteLine("Indtast E, O, C, R: ");
+                System.Console.WriteLine("Indtast Exit, Open, CLose, ReadKey, PhoneConnect, PhoneDisconnect: ");
                 input = Console.ReadLine();
                 if (string.IsNullOrEmpty(input)) continue;
 
-                switch (input[0])
+                switch (input)
                 {
-                    case 'E':
+                    case "Exit":
                         finish = true;
                         break;
 
-                    case 'O':
+                    case "Open":
                         door.DoorOpen = true;
                         break;
                         
-                    case 'C':
+                    case "Close":
                         door.DoorOpen = false;
                         break;
 
-                    case 'R':
+                    case "ReadKey":
                         System.Console.WriteLine("Indtast RFID id: ");
                         string idString = System.Console.ReadLine();
 
                         int id = Convert.ToInt32(idString);
                         riRfidReader.ScanRFID(id);
+                        break;
+                    case "PhoneConnect":
+                        chargeControl.IsConnected = true;
+                        break;
+                    case "PhoneDisconnect":
+                        chargeControl.IsConnected = false;
                         break;
 
                     default:

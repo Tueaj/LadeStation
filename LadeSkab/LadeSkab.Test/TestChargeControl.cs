@@ -26,7 +26,7 @@ namespace Ladeskab.Test
             usbCharger = Substitute.For<IUsbCharger>();
             display = Substitute.For<IDisplay>();
 
-            _uut = new ChargeControl();
+            _uut = new ChargeControl(null);
             _uut.UsbCharger = usbCharger;
             _uut.Display = display;
             _uut.ChargerConnectionValueEvent += (sender, args) =>
@@ -60,7 +60,7 @@ namespace Ladeskab.Test
         {
             usbCharger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs {Current = 0});
 
-            Assert.False(_uut.IsConnected());
+            Assert.False(_uut.IsConnected);
         }
         [Test]
         public void TestUsbChargerCurrentIs0AndEventRaised()
@@ -74,7 +74,7 @@ namespace Ladeskab.Test
         {
             usbCharger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs { Current = 1 });
 
-            Assert.True(_uut.IsConnected());
+            Assert.True(_uut.IsConnected);
         }
         [Test]
         public void TestUsbChargerCurrentIs1AndDisplayPrintUsbChargeDoneIsCalled()
@@ -95,7 +95,7 @@ namespace Ladeskab.Test
         {
             usbCharger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs { Current = 5 });
 
-            Assert.True(_uut.IsConnected());
+            Assert.True(_uut.IsConnected);
         }
         [Test]
         public void TestUsbChargerCurrentIs5AndDisplayPrintUsbChargeDoneIsCalled()
@@ -116,7 +116,7 @@ namespace Ladeskab.Test
         {
             usbCharger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs { Current = 6 });
 
-            Assert.True(_uut.IsConnected());
+            Assert.True(_uut.IsConnected);
         }
         [Test]
         public void TestUsbChargerCurrentIs6AndDisplayPrintUSBIsChargingIsCalled()
@@ -137,7 +137,7 @@ namespace Ladeskab.Test
         {
             usbCharger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs { Current = 500 });
 
-            Assert.True(_uut.IsConnected());
+            Assert.True(_uut.IsConnected);
         }
         [Test]
         public void TestUsbChargerCurrentIs500AndDisplayPrintUSBIsChargingIsCalled()
@@ -158,7 +158,7 @@ namespace Ladeskab.Test
         {
             usbCharger.CurrentValueEvent += Raise.EventWith(new CurrentEventArgs { Current = 501 });
 
-            Assert.True(_uut.IsConnected());
+            Assert.True(_uut.IsConnected);
         }
         [Test]
         public void TestUsbChargerCurrentIs501AndDisplayPrintUSBIsChargingIsCalled()
