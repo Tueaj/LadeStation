@@ -30,11 +30,13 @@ namespace Ladeskab.Libary
         public void LogDoorLocked(int id)
         {
             TW.WriteLine("{0}: Time for door locked with RFid: {1}",getTime().ToString(), id);
+            TW.Flush();
         }
 
         public void LogDoorUnlocked(int id)
         {
             TW.WriteLine("{0}: Time for door Unlocked with RFid: {1}", getTime().ToString(), id);
+            TW.Flush();
         }
 
     }

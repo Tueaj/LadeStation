@@ -20,6 +20,7 @@ namespace Ladeskab.Test
         private IChargeControl _chargeControlSource;
         private IRfidReader _RfidReader;
         private IDisplay _display;
+        private ILogFile _logFile;
 
         [SetUp]
         public void Setup()
@@ -29,7 +30,8 @@ namespace Ladeskab.Test
             _display = Substitute.For<IDisplay>();
             _RfidReader = Substitute.For<IRfidReader>();
             _chargeControlSource = Substitute.For<IChargeControl>();
-            _uut = new StationControl(_doorSource, _chargeControlSource, _RfidReader, _display);
+            _logFile = Substitute.For<ILogFile>();
+            _uut = new StationControl(_doorSource, _chargeControlSource, _RfidReader, _display, _logFile);
         }
 
         [Test]

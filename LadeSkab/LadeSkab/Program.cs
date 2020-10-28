@@ -16,7 +16,8 @@
             IDisplay display = new Display();
             IChargeControl chargeControl = new ChargeControl(usbCharger, display);
             IRfidReader riRfidReader = new FakeRfidReader();
-            ILogFile logFile = new LogFile(new StreamWriter("LogFile.txt"));
+            StreamWriter SW = new StreamWriter("LogFile.txt", true);
+            ILogFile logFile = new LogFile(SW);
             StationControl stationControl = new StationControl(door, chargeControl, riRfidReader, display, logFile);
             bool finish = false;
             do
