@@ -227,11 +227,6 @@ namespace Ladeskab.Test
 
             _display.Received().PrintConnectionFail();
         }
-
-
-
-
-
-
+        
     }
 }
