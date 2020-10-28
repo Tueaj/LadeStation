@@ -121,7 +121,7 @@ namespace Ladeskab.Libary
 
         private void setLadeskabState()
         {
-            if(_oldId == 0 && DoorState == false) //&& ChargerIsConnected == false
+            if(_oldId == 0 && DoorState == false) 
             {
                 _state = LadeskabState.Available;
                 _display.PrintReadRFID();
