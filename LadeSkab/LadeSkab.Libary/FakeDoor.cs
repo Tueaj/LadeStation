@@ -41,14 +41,11 @@ namespace Ladeskab.Libary
         public void OpenDoor()
         {
             DoorOpen = true;
-            DoorValueChanged();
-            
         }
 
         public void CloseDoor()
         {
             DoorOpen = false;
-            DoorValueChanged();
         }
 
         public void LockDoor()
