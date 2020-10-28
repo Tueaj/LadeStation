@@ -40,15 +40,9 @@ namespace Ladeskab.Libary
 
         public void OpenDoor()
         {
-            if (DoorLocked == false)
-            {
-                DoorOpen = true;
-                DoorValueChanged();
-            }
-            else
-            {
-                Console.WriteLine("Message from door: Door is locked, and cant be opened");
-            }
+            DoorOpen = true;
+            DoorValueChanged();
+            
         }
 
         public void CloseDoor()
