@@ -42,7 +42,7 @@ namespace Ladeskab.Libary
         }
 
         private void RfidDetected(int id)
-        {
+        { 
             
             switch (_state)
             {

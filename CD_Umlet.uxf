@@ -55,7 +55,7 @@ IUsbCharger
     <id>UMLClass</id>
     <coordinates>
       <x>595</x>
-      <y>658</y>
+      <y>721</y>
       <w>70</w>
       <h>21</h>
     </coordinates>
@@ -137,7 +137,7 @@ ILogFile
       <x>560</x>
       <y>546</y>
       <w>161</w>
-      <h>84</h>
+      <h>154</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 IDisplay
@@ -145,7 +145,14 @@ IDisplay
 +PrintConnectPhone():void
 +PrintReadRFID(): void
 +PrintConnectionFail(): void
-+PrintStationOccupied(): void</panel_attributes>
++PrintStationOccupied(): void
++PrintUSBChargeDone(): void
++PrintUSBIsCharging(): void
++PrintErrorRemovePhone(): void
++PrintStationLockedUseID(): void
++PrintDoorIsOpen(): void
++PrintTakePhoneCloseDoor(): void
++PrintWrongRFidTag(): void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -168,12 +175,12 @@ IChargeControl
     <id>Relation</id>
     <coordinates>
       <x>623</x>
-      <y>623</y>
+      <y>693</y>
       <w>21</w>
-      <h>49</h>
+      <h>42</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -484,12 +491,12 @@ IRfidReader</panel_attributes>
     <coordinates>
       <x>952</x>
       <y>231</y>
-      <w>168</w>
+      <w>175</w>
       <h>35</h>
     </coordinates>
-    <panel_attributes>ChargerConnectionValue
+    <panel_attributes>CurrentEventArgs
 --
-+ChargerConnected : bool &lt;&lt;property&gt;&gt;</panel_attributes>
++Current : double &lt;&lt;property&gt;&gt;</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
