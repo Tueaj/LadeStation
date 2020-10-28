@@ -26,11 +26,11 @@ namespace Ladeskab.Libary
         private IDoor _door;
         private IDisplay _display;
         public int _oldId = 0;
-
+        private ILogFile _logFile;
 
         private string logFile = "logfile.txt"; // Navnet på systemets log-fil
 
-        public StationControl(IDoor door, IChargeControl charger, IRfidReader reader, IDisplay display)
+        public StationControl(IDoor door, IChargeControl charger, IRfidReader reader, IDisplay display, ILogFile logFile)
         {
             _display = display;
             _door = door;
@@ -39,6 +39,7 @@ namespace Ladeskab.Libary
             _charger = charger;
             _charger.ChargerConnectionValueEvent += HandleChargerChangeEvent;
             _reader.RFIDDetectedEvent += RFidDetectedEvent;
+            _logFile = logFile;
         }
 
         private void RfidDetected(int id)
@@ -53,10 +54,7 @@ namespace Ladeskab.Libary
                         _door.LockDoor();
                         _charger.StartCharge();
                         _oldId = id;
-                        using (var writer = File.AppendText(logFile))
-                        {
-                            writer.WriteLine(DateTime.Now + ": Skab låst med RFID: {0}", _oldId);
-                        }
+                        _logFile.LogDoorLocked(_oldId);
 
                         _display.PrintStationLockedUseID();
                         _state = LadeskabState.Locked;
@@ -79,10 +77,7 @@ namespace Ladeskab.Libary
                     {
                         _charger.StopCharge();
                         _door.UnlockDoor();
-                        using (var writer = File.AppendText(logFile))
-                        {
-                            writer.WriteLine(DateTime.Now + ": Skab låst op med RFID: {0}", id);
-                        }
+                        _logFile.LogDoorUnlocked(_oldId);
 
                         _display.PrintTakePhoneCloseDoor();
                         _oldId = 0;

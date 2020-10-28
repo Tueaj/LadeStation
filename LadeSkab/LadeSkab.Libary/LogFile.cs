@@ -1,10 +1,11 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks.Dataflow;
+using Ladeskab.Libary.interfaces;
 
 namespace Ladeskab.Libary
 {
-    public class LogFile
+    public class LogFile: ILogFile
     {
         private TextWriter TW;
         public DateTime? DT = null;

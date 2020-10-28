@@ -1,4 +1,6 @@
 ﻿    using System;
+    using System.CodeDom.Compiler;
+    using System.IO;
     using Ladeskab.Libary.interfaces;
     using Ladeskab.Libary;
 
@@ -14,7 +16,8 @@
             IDisplay display = new Display();
             IChargeControl chargeControl = new ChargeControl(usbCharger, display);
             IRfidReader riRfidReader = new FakeRfidReader();
-            StationControl stationControl = new StationControl(door, chargeControl, riRfidReader, display);
+            ILogFile logFile = new LogFile(new StreamWriter("LogFile.txt"));
+            StationControl stationControl = new StationControl(door, chargeControl, riRfidReader, display, logFile);
             bool finish = false;
             do
             {
