@@ -48,6 +48,16 @@ namespace Ladeskab.Test
         }
 
         [Test]
+        public void OpenDoor_DoorLockedIsTrue_IsFalse()
+        {
+            _uut.DoorOpen = false;
+            _uut.DoorLocked = true;
+            _uut.OpenDoor();
+
+            Assert.That(_uut.DoorOpen, Is.False);
+        }
+
+        [Test]
         public void CloseDoor_DoorOpenIsFalse_IsFalse()
         {
             _uut.DoorOpen = false;

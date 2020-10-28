@@ -394,7 +394,7 @@ RFIDDetectedEventArgs</panel_attributes>
       <x>938</x>
       <y>665</y>
       <w>14</w>
-      <h>154</h>
+      <h>161</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -409,6 +409,8 @@ RFIDDetectedEventArgs</panel_attributes>
     </coordinates>
     <panel_attributes>loop
 --
+valign=top
+halign=left
 [While Rfid is wrong]</panel_attributes>
     <additional_attributes/>
   </element>
@@ -431,14 +433,17 @@ PrintConnectionFail()
       <x>497</x>
       <y>672</y>
       <w>847</w>
-      <h>140</h>
+      <h>147</h>
     </coordinates>
     <panel_attributes>Alternative
 --
-                                                             [Phone not connected]
+valign=top
+halign=left
+[Phone not connected]
 
 --
-                                                           [Phone is connected]</panel_attributes>
+
+[Phone is connected]</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -494,12 +499,14 @@ PrintStationLockedUseID()
     <id>UMLFrame</id>
     <coordinates>
       <x>413</x>
-      <y>623</y>
+      <y>357</y>
       <w>1022</w>
-      <h>105</h>
+      <h>371</h>
     </coordinates>
     <panel_attributes>loop
 --
+valign=top
+halign=left
 [While Phone not connected]</panel_attributes>
     <additional_attributes/>
   </element>
@@ -559,11 +566,13 @@ RFIDDetectedEventArgs</panel_attributes>
     </coordinates>
     <panel_attributes>Alternative
 --
-                                                             [RFID != old Id]
+valign=top
+halign=left
+[RFID != old Id]
 
 
 --
-                                                           [RFID == old Id]</panel_attributes>
+[RFID == old Id]</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
