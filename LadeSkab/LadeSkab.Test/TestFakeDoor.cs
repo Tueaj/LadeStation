@@ -114,11 +114,21 @@ namespace Ladeskab.Test
         }
 
         [Test]
-        public void DoorvalueChanged_valueChanges_sendsEvent()
+        public void DoorvalueChanged_valueChangesOpenDoor_sendsEvent()
         {
             bool WasRaise = false;
             _uut.DoorValueEvent += delegate { WasRaise = true; };
             _uut.OpenDoor();
+            Assert.That(WasRaise, Is.EqualTo(true));
+        }
+
+        [Test]
+        public void DoorvalueChanged_valueChangesCloseDoor_sendsEvent()
+        {
+            bool WasRaise = false;
+            _uut.DoorOpen = true;
+            _uut.DoorValueEvent += delegate { WasRaise = true; };
+            _uut.CloseDoor();
             Assert.That(WasRaise, Is.EqualTo(true));
         }
     }
