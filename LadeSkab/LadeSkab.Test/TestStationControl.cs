@@ -98,7 +98,7 @@ namespace Ladeskab.Test
 
         {
             //Arrange
-            _uut._state = StationControl.LadeskabState.Available;
+            //_uut._state = StationControl.LadeskabState.Available;
             _uut.ChargerIsConnected = true;
             RFIDDetectedEventArgs args = new RFIDDetectedEventArgs { RFID = 12345 };
 
@@ -115,7 +115,7 @@ namespace Ladeskab.Test
         public void RFidReaderEvent_LadeskabsDoorOpen_DoorRecivedNoCalls()
         {
             //Arrange
-            _uut._state = StationControl.LadeskabState.DoorOpen;
+            //_uut._state = StationControl.LadeskabState.DoorOpen;
             RFIDDetectedEventArgs args = new RFIDDetectedEventArgs { RFID = 12345 };
 
             //Act
@@ -130,7 +130,7 @@ namespace Ladeskab.Test
         public void RFidReaderEvent_LadeskabsDoorOpen_ChargeControlRecivedNoCalls()
         {
             //Arrange
-            _uut._state = StationControl.LadeskabState.DoorOpen;
+            //_uut._state = StationControl.LadeskabState.DoorOpen;
             RFIDDetectedEventArgs args = new RFIDDetectedEventArgs {RFID = 12345};
 
             //Act
@@ -145,7 +145,7 @@ namespace Ladeskab.Test
         public void RFidReaderEvent_LadeskabsStateLockedWrongID_DoorRecivedNoCalls()
         {
             //Arrange
-            _uut._state = StationControl.LadeskabState.Locked;
+            //_uut._state = StationControl.LadeskabState.Locked;
             _uut._oldId = 54321;
             RFIDDetectedEventArgs args = new RFIDDetectedEventArgs { RFID = 12345 };
             //Act
@@ -159,7 +159,7 @@ namespace Ladeskab.Test
         public void RFidReaderEvent_LadeskabsStateLockedWrongID_ChargeControlRecivedNoCalls()
         {
             //Arrange
-            _uut._state = StationControl.LadeskabState.Locked;
+            //_uut._state = StationControl.LadeskabState.Locked;
             _uut._oldId = 54321;
             RFIDDetectedEventArgs args = new RFIDDetectedEventArgs { RFID = 12345 };
             //Act
@@ -174,7 +174,7 @@ namespace Ladeskab.Test
         public void RFidReaderEvent_LadeskabsStateLockedRightID_StopChargeCalled()
         {
             //Arrange
-            _uut._state = StationControl.LadeskabState.Locked;
+            //_uut._state = StationControl.LadeskabState.Locked;
             _uut._oldId = 12345;
             RFIDDetectedEventArgs args = new RFIDDetectedEventArgs { RFID = 12345 };
             //Act
@@ -212,14 +212,15 @@ namespace Ladeskab.Test
             //Assert
             Assert.Zero(_uut._oldId);
         }
+
         [Test]
         public void RFidReaderEvent_LadeskabsStateAvailableChargerConnectedFalse()
-
         {
             //Arrange
             _uut._state = StationControl.LadeskabState.Available;
             _uut.ChargerIsConnected = false;
             RFIDDetectedEventArgs args = new RFIDDetectedEventArgs { RFID = 12345 };
+            _doorSource.DoorValueEvent += Raise.EventWith(new DoorValueEventArgs { DoorOpen = true });
 
             //Act
 
