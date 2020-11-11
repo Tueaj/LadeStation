@@ -18,14 +18,14 @@ namespace Ladeskab.Libary
             DoorOpen
         };
 
-        public bool DoorState = true;
-        public bool ChargerIsConnected = false;
+        public readonly bool DoorState = true;
+        private bool ChargerIsConnected = false;
         private LadeskabState _state;
         private IChargeControl _charger;
         private IRfidReader _reader;
         private IDoor _door;
         private IDisplay _display;
-        public int _oldId = 0;
+        private int _oldId = 0;
         private ILogFile _logFile;
 
         private string logFile = "logfile.txt"; // Navnet på systemets log-fil
