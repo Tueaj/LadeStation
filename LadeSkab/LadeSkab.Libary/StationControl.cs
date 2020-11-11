@@ -18,7 +18,7 @@ namespace Ladeskab.Libary
             DoorOpen
         };
 
-        public readonly bool DoorState = true;
+        public  bool DoorState = true;
         private bool ChargerIsConnected = false;
         private LadeskabState _state;
         private IChargeControl _charger;
