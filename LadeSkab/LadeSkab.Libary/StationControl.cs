@@ -11,7 +11,7 @@ namespace Ladeskab.Libary
     public class StationControl
     {
         // Enum med tilstande ("states") svarende til tilstandsdiagrammet for klassen
-        public enum LadeskabState
+        private enum LadeskabState
         {
             Available,
             Locked,
@@ -20,7 +20,7 @@ namespace Ladeskab.Libary
 
         public bool DoorState = true;
         public bool ChargerIsConnected = false;
-        public LadeskabState _state;
+        private LadeskabState _state;
         private IChargeControl _charger;
         private IRfidReader _reader;
         private IDoor _door;
@@ -105,7 +105,6 @@ namespace Ladeskab.Libary
             DoorState = e.DoorOpen;
             setLadeskabState();
         }
-        // Her mangler de andre trigger handlere --- Hvilke ?? - Tue
 
         private void HandleChargerChangeEvent(object sender, ChargerConnectionValue e)
         {
