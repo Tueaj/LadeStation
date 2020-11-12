@@ -35,8 +35,7 @@ namespace Ladeskab.Test
         }
 
         [Test]
-
-        public void DoorEvent_DoorIsOpenTrue_DoorStateIsTrue()
+        public void DoorEvent_DoorIsOpenTrue_PrintConnectPhoneCalledOnDisplay()
         {
             //Arrange
 
@@ -45,12 +44,12 @@ namespace Ladeskab.Test
 
             //Assert
 
-            Assert.IsTrue(_uut.DoorState);
+            _display.Received().PrintConnectPhone();
 
 
         }
         [Test]
-        public void DoorEvent_DoorIsOpenFalse_DoorStateIsFalse()
+        public void DoorEvent_DoorIsOpenFalse_PrintReadRFIDCalledOnDisplay()
         {
             //Arrange
 
@@ -59,7 +58,7 @@ namespace Ladeskab.Test
 
             //Assert
 
-            Assert.IsFalse(_uut.DoorState);
+            _display.Received().PrintReadRFID();
 
 
         }
