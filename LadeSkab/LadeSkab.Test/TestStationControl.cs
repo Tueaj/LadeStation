@@ -65,7 +65,7 @@ namespace Ladeskab.Test
         }
 
         [Test]
-        public void ChargerEvent_ChargeIsConnectedFalse_ChargerStateIsFalse()
+        public void ChargerEvent_ChargeIsConnectedFalse_PrintConnectionFailCalledOnDisplay()
         {
             //Arrange
             ChargerConnectionValue args0 = new ChargerConnectionValue { ChargerConnected = false };
@@ -78,20 +78,16 @@ namespace Ladeskab.Test
 
             _RfidReader.RFIDDetectedEvent += Raise.EventWith(args2);
 
-            //Act
-            
+            //Act            
 
-            //Assert
-
-            
+            //Assert            
             _display.Received().PrintConnectionFail();
-
-
-
         }
 
+
+
         [Test]
-        public void ChargerEvent_ChargeIsConnectedTrue_ChargerStateIsTue()
+        public void ChargerEvent_ChargeIsConnectedTrue_StartChargeCalledOnChargeControl()
         {
             //Arrange
             ChargerConnectionValue args0 = new ChargerConnectionValue { ChargerConnected = true };
@@ -109,34 +105,72 @@ namespace Ladeskab.Test
             //Assert
 
             _chargeControlSource.Received().StartCharge();
-
-
         }
 
-      /*  [Test]
-        public void RFidReaderEvent_LadeskabsStateAvailable_OldIDsetToEventID()
-
+        [Test]
+        public void ChargerEvent_ChargeIsConnectedTrue_LockDoorCalledOnDoor()
         {
             //Arrange
-
             ChargerConnectionValue args0 = new ChargerConnectionValue { ChargerConnected = true };
             _chargeControlSource.ChargerConnectionValueEvent += Raise.EventWith(args0);
 
-            DoorValueEventArgs args1 = new DoorValueEventArgs { DoorOpen = false};
+            DoorValueEventArgs args1 = new DoorValueEventArgs { DoorOpen = false };
             _doorSource.DoorValueEvent += Raise.EventWith(args1);
-          
-           
-            RFIDDetectedEventArgs args2 = new RFIDDetectedEventArgs { RFID = 12345 };
 
-            //Act
+            RFIDDetectedEventArgs args2 = new RFIDDetectedEventArgs { RFID = 54321 };
 
             _RfidReader.RFIDDetectedEvent += Raise.EventWith(args2);
 
-            //Assert
+            //Act
 
-          //  Assert.AreEqual(_uut._oldId, args1.RFID);
+            //Assert
+            _doorSource.Received().LockDoor();
         }
-      */
+
+        [Test]
+        public void ChargerEvent_ChargeIsConnectedTrue_LogDoorLockedCalledOnLogfile()
+        {
+            //Arrange
+            ChargerConnectionValue args0 = new ChargerConnectionValue { ChargerConnected = true };
+            _chargeControlSource.ChargerConnectionValueEvent += Raise.EventWith(args0);
+
+            DoorValueEventArgs args1 = new DoorValueEventArgs { DoorOpen = false };
+            _doorSource.DoorValueEvent += Raise.EventWith(args1);
+
+            RFIDDetectedEventArgs args2 = new RFIDDetectedEventArgs { RFID = 54321 };
+
+            _RfidReader.RFIDDetectedEvent += Raise.EventWith(args2);
+
+            //Act
+
+            //Assert
+            _logFile.ReceivedWithAnyArgs().LogDoorLocked(default);
+        }
+
+        /*  [Test]
+          public void RFidReaderEvent_LadeskabsStateAvailable_OldIDsetToEventID()
+
+          {
+              //Arrange
+
+              ChargerConnectionValue args0 = new ChargerConnectionValue { ChargerConnected = true };
+              _chargeControlSource.ChargerConnectionValueEvent += Raise.EventWith(args0);
+
+              DoorValueEventArgs args1 = new DoorValueEventArgs { DoorOpen = false};
+              _doorSource.DoorValueEvent += Raise.EventWith(args1);
+
+
+              RFIDDetectedEventArgs args2 = new RFIDDetectedEventArgs { RFID = 12345 };
+
+              //Act
+
+              _RfidReader.RFIDDetectedEvent += Raise.EventWith(args2);
+
+              //Assert
+
+            //  Assert.AreEqual(_uut._oldId, args1.RFID);
+          }
+        */
 
         [Test]
         public void RFidReaderEvent_LadeskabsDoorOpen_DoorRecivedNoCalls()
@@ -197,8 +231,36 @@ namespace Ladeskab.Test
             //Assert
            
             _display.Received().PrintWrongRFidTag();
-           
+
         }
+        [Test]
+        public void RFidReaderEvent_LadeskabsStateLockedWrongID_PrintStationOccupiedDisplayMethodCalled()
+        {
+            //Arrange
+
+            ChargerConnectionValue args0 = new ChargerConnectionValue { ChargerConnected = true };
+            _chargeControlSource.ChargerConnectionValueEvent += Raise.EventWith(args0);
+
+            DoorValueEventArgs args1 = new DoorValueEventArgs { DoorOpen = false };
+            _doorSource.DoorValueEvent += Raise.EventWith(args1);
+
+            RFIDDetectedEventArgs args2 = new RFIDDetectedEventArgs { RFID = 54321 };
+
+            _RfidReader.RFIDDetectedEvent += Raise.EventWith(args2);
+
+
+            RFIDDetectedEventArgs args = new RFIDDetectedEventArgs { RFID = 12345 };
+
+            //Act
+
+            _RfidReader.RFIDDetectedEvent += Raise.EventWith(args);
+
+            //Assert
+
+            _display.Received().PrintStationOccupied();
+
+        }
+
         [Test]
         public void RFidReaderEvent_LadeskabsStateLockedWrongID_ChargeControlRecivedNoCallsButArrangeAndContruct()
         {
@@ -243,6 +305,49 @@ namespace Ladeskab.Test
             //Assert
             _chargeControlSource.Received().StopCharge();
         }
+        [Test]
+        public void RFidReaderEvent_LadeskabsStateLockedRightID_LogDoorUnlockedCalledOnLogfile()
+        {
+            //Arrange
+            ChargerConnectionValue args0 = new ChargerConnectionValue { ChargerConnected = true };
+            _chargeControlSource.ChargerConnectionValueEvent += Raise.EventWith(args0);
+
+            DoorValueEventArgs args1 = new DoorValueEventArgs { DoorOpen = false };
+            _doorSource.DoorValueEvent += Raise.EventWith(args1);
+
+            RFIDDetectedEventArgs args2 = new RFIDDetectedEventArgs { RFID = 12345 };
+            _RfidReader.RFIDDetectedEvent += Raise.EventWith(args2);
+
+            RFIDDetectedEventArgs args = new RFIDDetectedEventArgs { RFID = 12345 };
+            //Act
+
+            _RfidReader.RFIDDetectedEvent += Raise.EventWith(args);
+
+            //Assert
+            _logFile.ReceivedWithAnyArgs().LogDoorUnlocked(default);
+        }
+        [Test]
+        public void RFidReaderEvent_LadeskabsStateLockedRightID_PrintTakePhoneCloseDoorCalledOnDoor()
+        {
+            //Arrange
+            ChargerConnectionValue args0 = new ChargerConnectionValue { ChargerConnected = true };
+            _chargeControlSource.ChargerConnectionValueEvent += Raise.EventWith(args0);
+
+            DoorValueEventArgs args1 = new DoorValueEventArgs { DoorOpen = false };
+            _doorSource.DoorValueEvent += Raise.EventWith(args1);
+
+            RFIDDetectedEventArgs args2 = new RFIDDetectedEventArgs { RFID = 12345 };
+            _RfidReader.RFIDDetectedEvent += Raise.EventWith(args2);
+
+            RFIDDetectedEventArgs args = new RFIDDetectedEventArgs { RFID = 12345 };
+            //Act
+
+            _RfidReader.RFIDDetectedEvent += Raise.EventWith(args);
+
+            //Assert
+            _display.Received().PrintTakePhoneCloseDoor();
+        }
+
         [Test]
         public void RFidReaderEvent_LadeskabsStateLockedRightID_UnlockDoorCalled()
         {
@@ -302,9 +407,7 @@ namespace Ladeskab.Test
 
             RFIDDetectedEventArgs args2 = new RFIDDetectedEventArgs { RFID = 12345 };
             _RfidReader.RFIDDetectedEvent += Raise.EventWith(args2);
-
-
-        
+                   
 
             //Act
          
