@@ -164,6 +164,24 @@ namespace Ladeskab.Test
         }
 
         [Test]
+        public void LadeskabsDoorOpen_DoorOpenDisplayMethodCalled()
+        {
+            //Arrange
+            DoorValueEventArgs args0 = new DoorValueEventArgs { DoorOpen = true };
+            _doorSource.DoorValueEvent += Raise.EventWith(args0);
+
+            RFIDDetectedEventArgs args = new RFIDDetectedEventArgs { RFID = 12345 };
+
+            //Act
+
+            _RfidReader.RFIDDetectedEvent += Raise.EventWith(args);
+
+            //Assert
+            _display.Received().PrintDoorIsOpen();
+        }
+
+
+        [Test]
         public void RFidReaderEvent_LadeskabsDoorOpen_ChargeControlRecivedNoCalls()
         {
             //Arrange
