@@ -146,31 +146,6 @@ namespace Ladeskab.Test
             _logFile.ReceivedWithAnyArgs().LogDoorLocked(default);
         }
 
-        /*  [Test]
-          public void RFidReaderEvent_LadeskabsStateAvailable_OldIDsetToEventID()
-
-          {
-              //Arrange
-
-              ChargerConnectionValue args0 = new ChargerConnectionValue { ChargerConnected = true };
-              _chargeControlSource.ChargerConnectionValueEvent += Raise.EventWith(args0);
-
-              DoorValueEventArgs args1 = new DoorValueEventArgs { DoorOpen = false};
-              _doorSource.DoorValueEvent += Raise.EventWith(args1);
-
-
-              RFIDDetectedEventArgs args2 = new RFIDDetectedEventArgs { RFID = 12345 };
-
-              //Act
-
-              _RfidReader.RFIDDetectedEvent += Raise.EventWith(args2);
-
-              //Assert
-
-            //  Assert.AreEqual(_uut._oldId, args1.RFID);
-          }
-        */
-
         [Test]
         public void RFidReaderEvent_LadeskabsDoorOpen_DoorRecivedNoCalls()
         {
@@ -369,34 +344,10 @@ namespace Ladeskab.Test
             _doorSource.Received().UnlockDoor();
         }
        
-        /*[Test]
-        public void RFidReaderEvent_LadeskabsStateLockedRightID_oldIdIsZero()
-        {
-            //Arrange
-            ChargerConnectionValue args0 = new ChargerConnectionValue { ChargerConnected = true };
-            _chargeControlSource.ChargerConnectionValueEvent += Raise.EventWith(args0);
-
-            DoorValueEventArgs args1 = new DoorValueEventArgs { DoorOpen = false };
-            _doorSource.DoorValueEvent += Raise.EventWith(args1);
-
-            RFIDDetectedEventArgs args2 = new RFIDDetectedEventArgs { RFID = 12345 };
-            _RfidReader.RFIDDetectedEvent += Raise.EventWith(args2);
-
-            RFIDDetectedEventArgs args = new RFIDDetectedEventArgs { RFID = 12345 };
-            //Act
-
-            _RfidReader.RFIDDetectedEvent += Raise.EventWith(args);
-
-            //Assert
-           // Assert.Zero(_uut._oldId);
-        }
-        */
         [Test]
         public void RFidReaderEvent_LadeskabsStateAvailableChargerConnectedFalse()
 
         {
-            //Arrange
-
             //Arrange
             ChargerConnectionValue args0 = new ChargerConnectionValue { ChargerConnected = false };
             _chargeControlSource.ChargerConnectionValueEvent += Raise.EventWith(args0);
